@@ -15,7 +15,7 @@ if (form) {
       return;
     }
     if (honeypot) return;
-    button.disabled = true;
+
     status.textContent = '신청 내용을 안전하게 전송하고 있습니다…';
     try {
       const response = await fetch('/api/applications', {
@@ -25,7 +25,7 @@ if (form) {
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.message || '접수에 실패했습니다. 잠시 후 다시 시도해 주세요.');
-      status.textContent = `상담 신청이 접수되었습니다. 접수번호: ${result.applicationId}`;
+      status.textContent = '상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.';
       form.reset();
     } catch (error) {
       status.textContent = error.message || '연결 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
